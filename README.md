@@ -5,7 +5,7 @@
 <a href="https://github.com/abbas-bachari/dbflux"><img src="https://img.shields.io/badge/Python%20-3.8+-green?style=plastic&logo=Python" alt="Python"></a>
   <a href="https://pypi.org/project/dbflux/"><img src="https://img.shields.io/pypi/l/dbflux?style=plastic" alt="License"></a>
   <a href="https://pepy.tech/project/dbflux"><img src="https://pepy.tech/badge/dbflux?style=flat-plastic" alt="Downloads"></a>
-</p>
+</p
 
 ## 🛠️ Version 1.0.0
 
