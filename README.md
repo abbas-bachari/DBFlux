@@ -67,6 +67,7 @@ from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.orm import declarative_base
 from time import time
 
+Base=declarative_base()
 db = Sqlite(db_name="example.db")
 
 
