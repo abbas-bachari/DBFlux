@@ -7,7 +7,7 @@
   <a href="https://pepy.tech/project/dbflux"><img src="https://pepy.tech/badge/dbflux?style=flat-plastic" alt="Downloads"></a>
 </p
 
-## 🛠️ Version 1.0.0
+## 🛠️ Version 1.0.1
 
 ## 🌟 **Introduction**
 
