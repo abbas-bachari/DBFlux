@@ -18,13 +18,13 @@ class DBModel:
             model_class: The ORM model class.
             db (BaseDB): An instance of BaseDB to delegate operations.
         """
-        self.model_class = model_class
-        self.db: "BaseDB" = db  # اینجا تایپ‌هینت باعث می‌شه IDE مستندات رو بشناسه
+        self._model_class = model_class
+        self._db: "BaseDB" = db  # اینجا تایپ‌هینت باعث می‌شه IDE مستندات رو بشناسه
 
 
     def create_tables(self, Base)-> bool:
         """Create tables if they don't exist"""
-        self.db.create_tables(Base)
+        self._db.create_tables(Base)
         
         
     def insert(self,  data: Union[Dict[str, Any], object, List[Dict[str, Any]], List[object]]):
@@ -69,7 +69,7 @@ class DBModel:
             0
 
             """
-        return self.db.insert(self.model_class, data)
+        return self._db.insert(self._model_class, data)
 
 
     def get(self, limit=None,conditions:list=None, order_by=None,descending=False ) :
@@ -123,7 +123,7 @@ class DBModel:
                 users = db.get(conditions=[User.id.between(1, 10)])
             """
 
-        return self.db.get(self.model_class, limit, conditions, order_by, descending)
+        return self._db.get(self._model_class, limit, conditions, order_by, descending)
            
       
        
@@ -160,7 +160,7 @@ class DBModel:
                 
             )
         """
-        return self.db.update(self.model_class, conditions, update_fields)
+        return self._db.update(self._model_class, conditions, update_fields)
         
     
     def bulk_update(self,  updates: List[Dict]) :
@@ -194,7 +194,7 @@ class DBModel:
             updated_count = db.bulk_update(updates)
             print(f"{updated_count} records updated.")
         """
-        return self.db.bulk_update(self.model_class, updates)
+        return self._db.bulk_update(self._model_class, updates)
        
 
     def paginate(self,  conditions: List=None, page: int = 1, per_page: int = 10,order_by=None,descending=False):
@@ -220,7 +220,7 @@ class DBModel:
             conditions.append(User.id.notbetween(1, 10))
         """
     
-       return self.db.paginate(self.model_class, conditions, page, per_page,order_by,descending)
+       return self._db.paginate(self._model_class, conditions, page, per_page,order_by,descending)
         
     def delete(self,  conditions: List|str=None,primary_keys:List[Any]=[]) -> int:
        """Delete records from the database based on the given conditions.
@@ -245,7 +245,7 @@ class DBModel:
             conditions.append(User.id.notbetween(1, 10))
 
         """
-       return self.db.delete(self.model_class, conditions,primary_keys)
+       return self._db.delete(self._model_class, conditions,primary_keys)
 
     def get_record_count(self,conditions:List=None):
         """
@@ -258,6 +258,6 @@ class DBModel:
         Returns:
             int: The number of records matching the given conditions. Returns 0 if no result is found.
         """
-        return self.db.get_record_count(self.model_class,conditions)
+        return self._db.get_record_count(self._model_class,conditions)
         
 
