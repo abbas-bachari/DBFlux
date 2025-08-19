@@ -27,6 +27,6 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/abbas-bachari/dbflux"
-Documentation = "https://github.com/abbas-bachari/dbflux#readme"
-Bug Tracker = "https://github.com/abbas-bachari/dbflux/issues"
+homepage      = "https://github.com/abbas-bachari/dbflux"
+documentation = "https://github.com/abbas-bachari/dbflux#readme"
+bug-tracker   = "https://github.com/abbas-bachari/dbflux/issues"
