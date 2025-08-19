@@ -7,7 +7,7 @@ name = "dbflux"
 version = "1.0.0"
 description = "A simple database management abstraction layer built on SQLAlchemy"
 authors = [
-    { name="Abbas Bachari", email="abbas-bachari@hotmail.com" }
+    { name = "Abbas Bachari", email = "abbas-bachari@hotmail.com" }
 ]
 readme = "README.md"
 license = { text = "MIT" }
@@ -17,5 +17,16 @@ dependencies = [
     "SQLAlchemy>=2.0.0",
 ]
 
+keywords = ["database", "SQLAlchemy", "ORM", "Python"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: SQLAlchemy"
+]
+
 [project.urls]
 Homepage = "https://github.com/abbas-bachari/dbflux"
+Documentation = "https://github.com/abbas-bachari/dbflux#readme"
+Bug Tracker = "https://github.com/abbas-bachari/dbflux/issues"
