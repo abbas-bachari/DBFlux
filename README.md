@@ -63,16 +63,18 @@ pip install .
 ```python
 
 from dbflux  import Sqlite,DBModel
-
+from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy.orm import declarative_base
+from time import time
 
 db = Sqlite(db_name="example.db")
 
 
 class User(Base):
     __tablename__ = "users"
-    id = mapped_column(Integer, primary_key=True)
-    name = mapped_column(String(50))
-    email = mapped_column(String(100))
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    email = Column(String(100))
 
 class Order(Base):
     __tablename__ = "orders"
