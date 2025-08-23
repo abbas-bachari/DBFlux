@@ -5,7 +5,7 @@
 <a href="https://github.com/abbas-bachari/dbflux"><img src="https://img.shields.io/badge/Python%20-3.8+-green?style=plastic&logo=Python" alt="Python"></a>
   <a href="https://pypi.org/project/dbflux/"><img src="https://img.shields.io/pypi/l/dbflux?style=plastic" alt="License"></a>
   <a href="https://pepy.tech/project/dbflux"><img src="https://pepy.tech/badge/dbflux?style=flat-plastic" alt="Downloads"></a>
-</p
+</p>
 
 ## 🛠️ Version 1.0.2
 
@@ -132,8 +132,10 @@ orders.insert(orders_data)
 
 ```python
 Base = declarative_base()
+
 class Order(Base):
     __tablename__ = "orders"
+
     order_id = Column(Integer, primary_key=True)
     product = Column(String, nullable=False)
     price = Column(Float, nullable=False)
@@ -156,25 +158,25 @@ class Order(Base):
 
 
 factory = DBFactory(db_name="data.db")
+
 db = factory.create("sqlite")
+
 db.create_tables(Base)
+
 orders_db = DBModel(Order ,db)
 
 
 order = Order(order_id=1, product="Product A", price=100, time=time())
+
 orders_db.insert( order)
 
-orders = orders_db.get(limit=1)
+orders:list[Order] = orders_db.get(limit=1)
+
 print(orders)
-print(orders[0])
-```
 
----
-
-### Result:
-
-```python
 >>> [Order(order_id=1, product=Product A, price=100.0, time=1755924289.1132557)]
+
+print(orders[0])
 
 >>> {
     "order_id": 1,
@@ -186,6 +188,7 @@ print(orders[0])
 ```
 
 ---
+
 
 ## 🔹 Supported Database Types
 
