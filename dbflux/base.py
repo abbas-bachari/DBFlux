@@ -5,7 +5,6 @@ from typing import List, Dict,Any,Union,Optional,Type
 from sqlalchemy import  or_, and_,insert,func
 from sqlalchemy import update
 import importlib
-from .utils import Data
 import logging,sys
 
 logging.basicConfig(level=logging.ERROR,  format="%(asctime)s - %(levelname)s - %(message)s")
@@ -247,7 +246,7 @@ class BaseDB:
         return self.execute_transaction(operation)
 
 
-    def get(self, model_class,limit=None,conditions:list=None, order_by=None,descending=False )-> Data:
+    def get(self, model_class,limit=None,conditions:list=None, order_by=None,descending=False ):
         
 
         """
@@ -297,8 +296,8 @@ class BaseDB:
 
             return query.all()
 
-        result = self.execute_transaction(operation)
-        return Data(result) # type: ignore
+        
+        return self.execute_transaction(operation)
     
    
         
@@ -344,7 +343,7 @@ class BaseDB:
         return self.execute_transaction(operation)
 
 
-    def paginate(self, model_class, conditions: List=None, page: int = 1, per_page: int = 10,order_by=None,descending=False)-> Data:
+    def paginate(self, model_class, conditions: List=None, page: int = 1, per_page: int = 10,order_by=None,descending=False):
        
         """Retrieve paginated records from the database.
         Args:
@@ -382,8 +381,8 @@ class BaseDB:
             
             return records
 
-        result= self.execute_transaction(operation)
-        return Data(result)
+        
+        return self.execute_transaction(operation)
     
     def delete(self, model_class, conditions: List|str=None,primary_keys:List[Any]=[]) -> int:
         """Delete records from the database based on the given conditions.

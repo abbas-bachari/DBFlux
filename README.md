@@ -7,7 +7,7 @@
   <a href="https://pepy.tech/project/dbflux"><img src="https://pepy.tech/badge/dbflux?style=flat-plastic" alt="Downloads"></a>
 </p
 
-## 🛠️ Version 1.0.1
+## 🛠️ Version 1.0.2
 
 ## 🌟 **Introduction**
 
@@ -76,6 +76,9 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50))
     email = Column(String(100))
+    age = Column(Integer)
+    def __repr__(self):
+        return f"User(id={self.id}, name={self.name}, email={self.email}, age={self.age})"
 
 class Order(Base):
     __tablename__ = "orders"
@@ -83,6 +86,21 @@ class Order(Base):
     product = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     time = Column(Integer, nullable=False)
+    
+    def to_dict(self):
+        return {
+            "order_id": self.order_id,
+            "product": self.product,
+            "price": self.price,
+            "time": self.time
+        }
+    
+    def __str__(self):
+        return json.dumps(self.to_dict(), indent=4,ensure_ascii=False)
+
+    def __repr__(self):
+        return f"Order(order_id={self.order_id}, product={self.product}, price={self.price}, time={self.time})"
+
 
 db.create_tables(Base)
 
@@ -92,9 +110,9 @@ orders=DBModel(Order,db)
 
 
 users_data=[
-    {"id": 1, "name": "Alice", "email": "alice@test.com"},
-    {"id": 2, "name": "Bob", "email": "bob@test.com"},
-    {"id": 3, "name": "Carol", "email": "carol@test.com"}
+    {"id": 1, "name": "Alice", "email": "alice@test.com","age":22},
+    {"id": 2, "name": "Bob", "email": "bob@test.com","age":21},
+    {"id": 3, "name": "Carol", "email": "carol@test.com","age":18}
 ]
 
 orders_data=[
@@ -113,20 +131,28 @@ orders.insert(orders_data)
 ## 💡 **Examples Usage DBFactory**
 
 ```python
-from dbflux import DBFactory,DBModel
-from sqlalchemy import Column, Integer, String, Float
-from sqlalchemy.orm import declarative_base
-from time import time
-
 Base = declarative_base()
-
 class Order(Base):
     __tablename__ = "orders"
     order_id = Column(Integer, primary_key=True)
     product = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     time = Column(Integer, nullable=False)
+    
+    def to_dict(self):
+        return {
+            "order_id": self.order_id,
+            "product": self.product,
+            "price": self.price,
+            "time": self.time
+        }
+    
+    def __str__(self):
+        return json.dumps(self.to_dict(), indent=4,ensure_ascii=False)
 
+    def __repr__(self):
+        return f"Order(order_id={self.order_id}, product={self.product}, price={self.price}, time={self.time})"
+    
 
 
 factory = DBFactory(db_name="data.db")
@@ -138,9 +164,9 @@ orders_db = DBModel(Order ,db)
 order = Order(order_id=1, product="Product A", price=100, time=time())
 orders_db.insert( order)
 
-orders = orders_db.get(limit=1).to_json()
-
+orders = orders_db.get(limit=1)
 print(orders)
+print(orders[0])
 ```
 
 ---
@@ -148,14 +174,15 @@ print(orders)
 ### Result:
 
 ```python
-[
-    {
-        "price": 100.0,
-        "time": 1755565113.9635222,
-        "order_id": 1,
-        "product": "Product A"
+>>> [Order(order_id=1, product=Product A, price=100.0, time=1755924289.1132557)]
+
+>>> {
+    "order_id": 1,
+    "product": "Product A",
+    "price": 100.0,
+    "time": 1755924289.1132557
     }
-]
+
 ```
 
 ---
